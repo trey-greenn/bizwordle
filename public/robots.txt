@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: www.businesswordle.com
+
+# Sitemaps
+Sitemap: www.businesswordle.com/sitemap.xml
