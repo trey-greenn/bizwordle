@@ -30,6 +30,72 @@ interface GameState {
   maxGuesses: number;
 }
 
+// GameHeaders component to display the game parameters
+const GameHeaders = () => {
+  const headers = [
+    { name: "Industry", color: "#4CAF50" },  // Green
+    { name: "Founded", color: "#2196F3" },   // Blue
+    { name: "Headquarters", color: "#FF9800" }, // Orange
+    { name: "Fortune 500 Rank", color: "#E91E63" }, // Pink
+    { name: "CEO", color: "#9C27B0" }        // Purple
+  ];
+
+  return (
+    <div className="game-headers">
+      <h3 className="game-headers-title">Guess these business attributes:</h3>
+      <div className="game-headers-container">
+        {headers.map((header) => (
+          <div 
+            key={header.name} 
+            className="game-header-box"
+            style={{ backgroundColor: header.color }}
+          >
+            {header.name}
+          </div>
+        ))}
+      </div>
+      <style jsx>{`
+        .game-headers {
+          margin: 1.5rem 0;
+          text-align: center;
+        }
+        .game-headers-title {
+          margin-bottom: 0.75rem;
+          font-size: 1.1rem;
+          color: #555;
+        }
+        .game-headers-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 0.75rem;
+        }
+        .game-header-box {
+          padding: 0.75rem 1rem;
+          border-radius: 12px;
+          color: white;
+          font-weight: 600;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .game-header-box:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        @media (max-width: 600px) {
+          .game-headers-container {
+            gap: 0.5rem;
+          }
+          .game-header-box {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.9rem;
+          }
+        }
+      `}</style>
+    </div>
+  );
+};
+
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredBusinesses, setFilteredBusinesses] = useState<typeof dummyBusinesses>([]);
@@ -209,6 +275,8 @@ export default function Home() {
         
         {!gameState.gameOver ? (
           <>
+            <GameHeaders />
+            
             <div className="gameControls">
               <div className="searchContainer">
                 <input
