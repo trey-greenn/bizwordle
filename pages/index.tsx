@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import SEO from '@/components/SEO';
+import Header from '@/components/Header';
 
 // Dummy data for players
 // ... existing code ...
@@ -253,7 +254,8 @@ export default function Home() {
   }
 
   return (
-    <div className="container">
+    <div className="w-full">
+      <Header/>
       <SEO/>
 
       <main className="main">
@@ -397,10 +399,98 @@ export default function Home() {
         )}
       </main>
 
-      <footer className="footer">
-        <p>Created by Diz</p>
-        <p>This site is not affiliated with Fortune 500 companies.</p>
-      </footer>
+
+      {/* Blog Section for SEO */}
+      <section className="blog-section">
+        <div className="max-w-4xl mx-auto px-4 py-12">
+          <h2 className="text-2xl font-bold mb-6 text-center">MLB Wordle Blog</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Daily Post */}
+            <article className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+              <span className="text-xs text-blue-600 dark:text-blue-400 font-semibold">TODAY'S PUZZLE</span>
+              <h3 className="text-xl font-bold mt-2 mb-3">
+                <a href="/blog/todays-mlb-wordle-april-23-2025" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                  Today's MLB Wordle – April 23, 2025 (Hint & Stats)
+                </a>
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                Struggling with today's MLB Wordle? Here's a subtle hint: This All-Star has dominated the American League for years. Plus check out today's most common first guesses!
+              </p>
+              <a href="/blog/todays-mlb-wordle-april-23-2025" className="text-blue-600 dark:text-blue-400 font-medium hover:underline">
+                Read more →
+              </a>
+            </article>
+            
+            {/* Evergreen Content */}
+            <article className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+              <span className="text-xs text-green-600 dark:text-green-400 font-semibold">STRATEGY GUIDE</span>
+              <h3 className="text-xl font-bold mt-2 mb-3">
+                <a href="/blog/how-to-win-mlb-wordle-every-time" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                  How to Win MLB Wordle Every Time: Pro Tips & Strategies
+                </a>
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                Master the daily MLB player guessing game with our expert strategies. Learn which players to guess first, how to use process of elimination, and win MLB Wordle in fewer guesses!
+              </p>
+              <a href="/blog/how-to-win-mlb-wordle-every-time" className="text-blue-600 dark:text-blue-400 font-medium hover:underline">
+                Read more →
+              </a>
+            </article>
+          </div>
+          
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* More SEO-rich content blocks */}
+            <article className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-5 hover:shadow-md transition-shadow">
+              <h3 className="text-lg font-bold mb-2">
+                <a href="/blog/mlb-wordle-vs-traditional-wordle" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                  MLB Wordle vs Traditional Wordle: Key Differences Explained
+                </a>
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                How our baseball-themed word game puts a unique spin on the classic formula for MLB fans.
+              </p>
+            </article>
+            
+            <article className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-5 hover:shadow-md transition-shadow">
+              <h3 className="text-lg font-bold mb-2">
+                <a href="/blog/most-guessed-players-mlb-wordle" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                  10 Most Guessed Players in MLB Wordle History
+                </a>
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                From Mike Trout to Shohei Ohtani: See which baseball stars everyone tries first in our daily baseball guessing game.
+              </p>
+            </article>
+            
+            <article className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-5 hover:shadow-md transition-shadow">
+              <h3 className="text-lg font-bold mb-2">
+                <a href="/blog/baseball-word-games-history" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                  The History of Baseball Word Games and Puzzles
+                </a>
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                From baseball crosswords to modern MLB Wordle - explore how America's pastime has inspired word puzzles through the decades.
+              </p>
+            </article>
+          </div>
+          
+          {/* Rich SEO footer with long-tail keywords */}
+          <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <h4 className="font-medium mb-4 text-gray-700 dark:text-gray-300">Popular MLB Wordle Topics</h4>
+            <div className="flex flex-wrap gap-2 text-sm">
+              <a href="/tags/daily-baseball-puzzle" className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">daily baseball puzzle</a>
+              <a href="/tags/mlb-word-game" className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">mlb word game</a>
+              <a href="/tags/baseball-wordle" className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">baseball wordle</a>
+              <a href="/tags/guess-the-mlb-player" className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">guess the mlb player</a>
+              <a href="/tags/baseball-guessing-game" className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">baseball guessing game</a>
+              <a href="/tags/mlb-player-quiz" className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">mlb player quiz</a>
+              <a href="/tags/baseball-stats-game" className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">baseball stats game</a>
+              <a href="/tags/daily-mlb-challenge" className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">daily mlb challenge</a>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
