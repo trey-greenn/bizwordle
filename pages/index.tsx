@@ -2,28 +2,44 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import SEO from '@/components/SEO';
 import Header from '@/components/Header';
+import fs from 'fs';
+import path from 'path';
+import { GetStaticProps } from 'next';
 
-// Dummy data for players
-// ... existing code ...
+// Business interface
+interface Business {
+  name: string;
+  industry: string;
+  founded: number;
+  headquarters: string;
+  fortuneRank: number;
+  ceo: string;
+}
 
-// Dummy data for businesses based on bizwordle.csv
-const dummyBusinesses = [
-  { name: "Apple", industry: "Technology", founded: 1976, headquarters: "USA", fortuneRank: 3, ceo: "Tim Cook" },
-  { name: "Microsoft", industry: "Technology", founded: 1975, headquarters: "USA", fortuneRank: 6, ceo: "Satya Nadella" },
-  { name: "Amazon", industry: "E-commerce", founded: 1994, headquarters: "USA", fortuneRank: 2, ceo: "Andy Jassy" },
-  { name: "Tesla", industry: "Automotive", founded: 2003, headquarters: "USA", fortuneRank: 33, ceo: "Elon Musk" },
-  { name: "Google", industry: "Technology", founded: 1998, headquarters: "USA", fortuneRank: 8, ceo: "Sundar Pichai" },
-  { name: "Walmart", industry: "Retail", founded: 1962, headquarters: "USA", fortuneRank: 1, ceo: "Doug McMillon" },
-  { name: "Toyota", industry: "Automotive", founded: 1937, headquarters: "Japan", fortuneRank: 10, ceo: "Koji Sato" },
-  { name: "Meta", industry: "Technology", founded: 2004, headquarters: "USA", fortuneRank: 34, ceo: "Mark Zuckerberg" },
-  { name: "Berkshire Hathaway", industry: "Conglomerate", founded: 1839, headquarters: "USA", fortuneRank: 7, ceo: "Warren Buffett" },
-  { name: "JPMorgan Chase", industry: "Banking", founded: 1799, headquarters: "USA", fortuneRank: 17, ceo: "Jamie Dimon" },
-];
+// Function to parse CSV data - used in getStaticProps
+const parseCSV = (csvData: string): Business[] => {
+  const lines = csvData.split('\n');
+  // Skip header row and get data rows
+  const dataRows = lines.slice(1).filter(row => row.trim().length > 0);
+  
+  return dataRows.map(row => {
+    const columns = row.split(',');
+    
+    return {
+      name: columns[0],
+      industry: columns[1],
+      founded: parseInt(columns[2], 10),
+      headquarters: columns[3],
+      fortuneRank: parseInt(columns[4], 10),
+      ceo: columns[5]
+    };
+  });
+};
 
 // Game state interface
 interface GameState {
-  mysteryBusiness: typeof dummyBusinesses[0] | null;
-  guesses: typeof dummyBusinesses[0][];
+  mysteryBusiness: Business | null;
+  guesses: Business[];
   gameOver: boolean;
   won: boolean;
   gaveUp: boolean;
@@ -43,63 +59,28 @@ const GameHeaders = () => {
 
   return (
     <div className="game-headers">
-      <h3 className="game-headers-title">Guess these business attributes:</h3>
-      <div className="game-headers-container">
-        {headers.map((header) => (
-          <div 
-            key={header.name} 
-            className="game-header-box"
-            style={{ backgroundColor: header.color }}
-          >
-            {header.name}
-          </div>
-        ))}
-      </div>
-      <style jsx>{`
-        .game-headers {
-          margin: 1.5rem 0;
-          text-align: center;
-        }
-        .game-headers-title {
-          margin-bottom: 0.75rem;
-          font-size: 1.1rem;
-          color: #555;
-        }
-        .game-headers-container {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 0.75rem;
-        }
-        .game-header-box {
-          padding: 0.75rem 1rem;
-          border-radius: 12px;
-          color: white;
-          font-weight: 600;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-          transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .game-header-box:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
-        @media (max-width: 600px) {
-          .game-headers-container {
-            gap: 0.5rem;
-          }
-          .game-header-box {
-            padding: 0.5rem 0.75rem;
-            font-size: 0.9rem;
-          }
-        }
-      `}</style>
+      {/* ... existing code ... */}
     </div>
   );
 };
 
-export default function Home() {
+// Get static props to load the CSV data at build time
+export const getStaticProps: GetStaticProps = async () => {
+  const csvFilePath = path.join(process.cwd(), 'public', 'bizwordle.csv');
+  const csvData = fs.readFileSync(csvFilePath, 'utf-8');
+  const businesses = parseCSV(csvData);
+
+  return {
+    props: {
+      businesses
+    }
+  };
+};
+
+// Home component with businesses as props
+export default function Home({ businesses }: { businesses: Business[] }) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [filteredBusinesses, setFilteredBusinesses] = useState<typeof dummyBusinesses>([]);
+  const [filteredBusinesses, setFilteredBusinesses] = useState<Business[]>([]);
   const [showInstructions, setShowInstructions] = useState(true);
   const [gameState, setGameState] = useState<GameState>({
     mysteryBusiness: null,
@@ -114,10 +95,10 @@ export default function Home() {
   // Initialize game on component mount
   useEffect(() => {
     // Select a random business as the mystery business
-    const randomIndex = Math.floor(Math.random() * dummyBusinesses.length);
+    const randomIndex = Math.floor(Math.random() * businesses.length);
     setGameState(prev => ({
       ...prev,
-      mysteryBusiness: dummyBusinesses[randomIndex],
+      mysteryBusiness: businesses[randomIndex],
       loading: false
     }));
     
@@ -128,7 +109,7 @@ export default function Home() {
     } else {
       localStorage.setItem('bizWordleHasPlayed', 'true');
     }
-  }, []);
+  }, [businesses]);
 
   // Handle search input change
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -136,7 +117,7 @@ export default function Home() {
     setSearchTerm(term);
     
     if (term.length > 0) {
-      const filtered = dummyBusinesses.filter(business => 
+      const filtered = businesses.filter(business => 
         business.name.toLowerCase().includes(term.toLowerCase()) &&
         !gameState.guesses.some(guess => guess.name === business.name)
       );
@@ -147,7 +128,7 @@ export default function Home() {
   };
 
   // Handle business selection
-  const selectBusiness = (business: typeof dummyBusinesses[0]) => {
+  const selectBusiness = (business: Business) => {
     setSearchTerm('');
     setFilteredBusinesses([]);
     
@@ -180,9 +161,9 @@ export default function Home() {
 
   // Handle new game
   const handleNewGame = () => {
-    const randomIndex = Math.floor(Math.random() * dummyBusinesses.length);
+    const randomIndex = Math.floor(Math.random() * businesses.length);
     setGameState({
-      mysteryBusiness: dummyBusinesses[randomIndex],
+      mysteryBusiness: businesses[randomIndex],
       guesses: [],
       gameOver: false,
       won: false,
@@ -193,13 +174,13 @@ export default function Home() {
   };
 
   // Check if a property matches the mystery business
-  const isMatch = (guess: typeof dummyBusinesses[0], property: keyof typeof dummyBusinesses[0]) => {
+  const isMatch = (guess: Business, property: keyof Business) => {
     if (!gameState.mysteryBusiness) return false;
     return guess[property] === gameState.mysteryBusiness[property];
   };
 
   // Get directional hint for numeric values
-  const getDirectionalHint = (guess: typeof dummyBusinesses[0], property: 'founded' | 'fortuneRank') => {
+  const getDirectionalHint = (guess: Business, property: 'founded' | 'fortuneRank') => {
     if (!gameState.mysteryBusiness) return null;
     
     if (guess[property] === gameState.mysteryBusiness[property]) {
