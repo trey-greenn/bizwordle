@@ -384,7 +384,7 @@ export default function Home({ businesses }: { businesses: Business[] }) {
       {/* Blog Section for SEO */}
       <section className="blog-section">
         <div className="max-w-4xl mx-auto px-4 py-12">
-          <h2 className="text-2xl font-bold mb-6 text-center">MLB Wordle Blog</h2>
+          <h2 className="text-2xl font-bold mb-6 text-center">Business Blog</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Daily Post */}
@@ -392,11 +392,11 @@ export default function Home({ businesses }: { businesses: Business[] }) {
               <span className="text-xs text-blue-600 dark:text-blue-400 font-semibold">TODAY'S PUZZLE</span>
               <h3 className="text-xl font-bold mt-2 mb-3">
                 <a href="/blog/todays-mlb-wordle-april-23-2025" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                  Today's MLB Wordle – April 23, 2025 (Hint & Stats)
+                  Today's Business Wordle  (Hint & Stats)
                 </a>
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                Struggling with today's MLB Wordle? Here's a subtle hint: This All-Star has dominated the American League for years. Plus check out today's most common first guesses!
+                Struggling with today's Business Wordle? Here's a subtle hint: This All-Star has dominated the American League for years. Plus check out today's most common first guesses!
               </p>
               <a href="/blog/todays-mlb-wordle-april-23-2025" className="text-blue-600 dark:text-blue-400 font-medium hover:underline">
                 Read more →
@@ -408,11 +408,11 @@ export default function Home({ businesses }: { businesses: Business[] }) {
               <span className="text-xs text-green-600 dark:text-green-400 font-semibold">STRATEGY GUIDE</span>
               <h3 className="text-xl font-bold mt-2 mb-3">
                 <a href="/blog/how-to-win-mlb-wordle-every-time" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                  How to Win MLB Wordle Every Time: Pro Tips & Strategies
+                  How to Win Business Wordle Every Time: Pro Tips & Strategies
                 </a>
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                Master the daily MLB player guessing game with our expert strategies. Learn which players to guess first, how to use process of elimination, and win MLB Wordle in fewer guesses!
+                Master the daily Business player guessing game with our expert strategies. Learn which players to guess first, how to use process of elimination, and win MLB Wordle in fewer guesses!
               </p>
               <a href="/blog/how-to-win-mlb-wordle-every-time" className="text-blue-600 dark:text-blue-400 font-medium hover:underline">
                 Read more →
@@ -425,18 +425,18 @@ export default function Home({ businesses }: { businesses: Business[] }) {
             <article className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-5 hover:shadow-md transition-shadow">
               <h3 className="text-lg font-bold mb-2">
                 <a href="/blog/mlb-wordle-vs-traditional-wordle" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                  MLB Wordle vs Traditional Wordle: Key Differences Explained
+                Business Wordle vs Traditional Wordle: Key Differences Explained
                 </a>
               </h3>
               <p className="text-sm text-gray-600 dark:text-gray-300">
-                How our baseball-themed word game puts a unique spin on the classic formula for MLB fans.
+                How our baseball-themed word game puts a unique spin on the classic formula for Business fans.
               </p>
             </article>
             
             <article className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-5 hover:shadow-md transition-shadow">
               <h3 className="text-lg font-bold mb-2">
                 <a href="/blog/most-guessed-players-mlb-wordle" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                  10 Most Guessed Players in MLB Wordle History
+                  10 Most Guessed Players in Business Wordle History
                 </a>
               </h3>
               <p className="text-sm text-gray-600 dark:text-gray-300">
@@ -451,14 +451,14 @@ export default function Home({ businesses }: { businesses: Business[] }) {
                 </a>
               </h3>
               <p className="text-sm text-gray-600 dark:text-gray-300">
-                From baseball crosswords to modern MLB Wordle - explore how America's pastime has inspired word puzzles through the decades.
+                From baseball crosswords to modern Business Wordle - explore how America's pastime has inspired word puzzles through the decades.
               </p>
             </article>
           </div>
           
           {/* Rich SEO footer with long-tail keywords */}
           <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-            <h4 className="font-medium mb-4 text-gray-700 dark:text-gray-300">Popular MLB Wordle Topics</h4>
+            <h4 className="font-medium mb-4 text-gray-700 dark:text-gray-300">Popular Business Wordle Topics</h4>
             <div className="flex flex-wrap gap-2 text-sm">
               <a href="/tags/daily-baseball-puzzle" className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">daily baseball puzzle</a>
               <a href="/tags/mlb-word-game" className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">mlb word game</a>
